@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TradeSymmetry | Professional Trading Scripts & Algorithms</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -60,7 +63,7 @@
             left: 0;
             right: 0;
             height: 64px;
-            background: rgba(11, 14, 20, 0.8);
+            background: var(--nav-bg);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
@@ -70,6 +73,12 @@
             padding: 0 24px;
             max-width: 1400px;
             margin: 0 auto;
+            transition: background 0.3s ease;
+        }
+
+        .nav.scrolled {
+            background: var(--nav-bg-scrolled);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
         .nav-logo {
@@ -132,7 +141,8 @@
             height: 20px;
         }
 
-        .sun-icon, .moon-icon {
+        .sun-icon,
+        .moon-icon {
             display: none;
         }
 
@@ -250,8 +260,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
         }
 
         .hero-title {
@@ -684,8 +701,13 @@
         }
 
         @keyframes chartGrow {
-            from { transform: scaleY(0); }
-            to { transform: scaleY(1); }
+            from {
+                transform: scaleY(0);
+            }
+
+            to {
+                transform: scaleY(1);
+            }
         }
 
         .proof-metrics {
@@ -975,6 +997,7 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
+
             .features-grid,
             .scripts-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1070,12 +1093,16 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="nav">
         <a href="#" class="nav-logo">
             <div class="nav-logo-icon">
-                <svg viewBox="0 0 24 24"><path d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h2v2H7V7zm4 0h2v2h-2V7zm4 0h2v2h-2V7zM7 11h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM7 15h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z"/></svg>
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h2v2H7V7zm4 0h2v2h-2V7zm4 0h2v2h-2V7zM7 11h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM7 15h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z" />
+                </svg>
             </div>
             <span class="nav-logo-text">TradeSymmetry</span>
         </a>
@@ -1085,18 +1112,18 @@
             <a href="#about" class="nav-link">About</a>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                 <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="5"/>
-                    <line x1="12" y1="1" x2="12" y2="3"/>
-                    <line x1="12" y1="21" x2="12" y2="23"/>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                    <line x1="1" y1="12" x2="3" y2="12"/>
-                    <line x1="21" y1="12" x2="23" y2="12"/>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    <circle cx="12" cy="12" r="5" />
+                    <line x1="12" y1="1" x2="12" y2="3" />
+                    <line x1="12" y1="21" x2="12" y2="23" />
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                    <line x1="1" y1="12" x2="3" y2="12" />
+                    <line x1="21" y1="12" x2="23" y2="12" />
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
                 </svg>
                 <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                 </svg>
             </button>
             <a href="https://www.tradingview.com/u/TradeSymmetry/" target="_blank" class="nav-cta">View Scripts</a>
@@ -1131,7 +1158,8 @@
                 Professional Trading Algorithms
             </div>
             <h1 class="hero-title">Trading Decoded through Symmetry</h1>
-            <p class="hero-subtitle">Institutional-grade TradingView scripts and algorithmic strategies designed for precision, reliability, and consistent performance.</p>
+            <p class="hero-subtitle">Institutional-grade TradingView scripts and algorithmic strategies designed for
+                precision, reliability, and consistent performance.</p>
             <div>
                 <a href="#scripts" class="hero-cta">
                     Explore Scripts
@@ -1164,50 +1192,78 @@
         <div class="section-header">
             <div class="section-label">Why TradeSymmetry</div>
             <h2 class="section-title">Tools Built for Serious Traders</h2>
-            <p class="section-desc">Every script is engineered with precision, backed by data, and designed to give you the analytical edge you need.</p>
+            <p class="section-desc">Every script is engineered with precision, backed by data, and designed to give you
+                the analytical edge you need.</p>
         </div>
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                    </svg>
                 </div>
                 <h3 class="feature-title">Non-Repainting</h3>
-                <p class="feature-desc">All indicators are built with non-repainting logic, ensuring reliable signals that don't change after the fact.</p>
+                <p class="feature-desc">All indicators are built with non-repainting logic, ensuring reliable signals
+                    that don't change after the fact.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="3" y1="9" x2="21" y2="9"></line>
+                        <line x1="9" y1="21" x2="9" y2="9"></line>
+                    </svg>
                 </div>
                 <h3 class="feature-title">Multi-Timeframe</h3>
-                <p class="feature-desc">Analyze markets across multiple timeframes simultaneously for a comprehensive view of market dynamics.</p>
+                <p class="feature-desc">Analyze markets across multiple timeframes simultaneously for a comprehensive
+                    view of market dynamics.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
                 </div>
                 <h3 class="feature-title">Alert Enabled</h3>
-                <p class="feature-desc">Built-in alert functionality keeps you notified of trading opportunities even when you're away from the charts.</p>
+                <p class="feature-desc">Built-in alert functionality keeps you notified of trading opportunities even
+                    when you're away from the charts.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
                 </div>
                 <h3 class="feature-title">Risk Management</h3>
-                <p class="feature-desc">Integrated position sizing and risk calculation tools to help protect your capital on every trade.</p>
+                <p class="feature-desc">Integrated position sizing and risk calculation tools to help protect your
+                    capital on every trade.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
                 </div>
                 <h3 class="feature-title">Clear Signals</h3>
-                <p class="feature-desc">Unambiguous entry and exit signals designed for quick decision-making in fast-moving markets.</p>
+                <p class="feature-desc">Unambiguous entry and exit signals designed for quick decision-making in
+                    fast-moving markets.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    <svg viewBox="0 0 24 24">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
                 </div>
                 <h3 class="feature-title">Well Documented</h3>
-                <p class="feature-desc">Comprehensive documentation and tutorials help you understand and maximize each tool's potential.</p>
+                <p class="feature-desc">Comprehensive documentation and tutorials help you understand and maximize each
+                    tool's potential.</p>
             </div>
         </div>
     </section>
@@ -1217,17 +1273,21 @@
         <div class="section-header">
             <div class="section-label">Script Library</div>
             <h2 class="section-title">Premium Trading Tools</h2>
-            <p class="section-desc">Explore our collection of professional-grade TradingView scripts designed for various trading styles and markets.</p>
+            <p class="section-desc">Explore our collection of professional-grade TradingView scripts designed for
+                various trading styles and markets.</p>
         </div>
         </div>
         <div class="scripts-grid">
-            <a href="https://www.tradingview.com/script/8rg748c1-Range-Deviations-PRO-Trade-Symmetry/" target="_blank" class="script-card">
+            <a href="https://www.tradingview.com/script/8rg748c1-Range-Deviations-PRO-Trade-Symmetry/" target="_blank"
+                class="script-card">
                 <div class="script-preview">
                     <svg class="script-preview-chart" viewBox="0 0 200 120" preserveAspectRatio="none">
-                        <rect x="10" y="40" width="180" height="40" fill="none" stroke="#2962FF" stroke-width="1" stroke-dasharray="4"/>
-                        <rect x="10" y="55" width="180" height="10" fill="none" stroke="#00E676" stroke-width="1"/>
-                        <line x1="10" y1="40" x2="10" y2="80" stroke="#FF1744" stroke-width="1" stroke-dasharray="2"/>
-                        <line x1="190" y1="40" x2="190" y2="80" stroke="#FF1744" stroke-width="1" stroke-dasharray="2"/>
+                        <rect x="10" y="40" width="180" height="40" fill="none" stroke="#2962FF" stroke-width="1"
+                            stroke-dasharray="4" />
+                        <rect x="10" y="55" width="180" height="10" fill="none" stroke="#00E676" stroke-width="1" />
+                        <line x1="10" y1="40" x2="10" y2="80" stroke="#FF1744" stroke-width="1" stroke-dasharray="2" />
+                        <line x1="190" y1="40" x2="190" y2="80" stroke="#FF1744" stroke-width="1"
+                            stroke-dasharray="2" />
                         <text x="25" y="35" fill="#94A3B8" font-size="6">+2SD</text>
                         <text x="25" y="65" fill="#00E676" font-size="6">EQUILIBRIUM</text>
                         <text x="25" y="95" fill="#94A3B8" font-size="6">-2SD</text>
@@ -1238,18 +1298,22 @@
                     <h4 class="script-name">Range Deviations PRO</h4>
                     <div class="script-category">Session Analysis • ICT Methodology</div>
                     <div class="script-metrics">
-                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span class="script-metric-value">32</span></span>
-                        <span class="script-metric"><span class="script-metric-label">Updated: </span><span class="script-metric-value">Dec 2025</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span
+                                class="script-metric-value">32</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Updated: </span><span
+                                class="script-metric-value">Dec 2025</span></span>
                     </div>
                 </div>
             </a>
-            <a href="https://www.tradingview.com/script/2VUW4Xol-Multi-Anchor-VWAP-Trade-Symmetry/" target="_blank" class="script-card">
+            <a href="https://www.tradingview.com/script/2VUW4Xol-Multi-Anchor-VWAP-Trade-Symmetry/" target="_blank"
+                class="script-card">
                 <div class="script-preview">
                     <svg class="script-preview-chart" viewBox="0 0 200 120" preserveAspectRatio="none">
-                        <path d="M0,80 Q50,50 100,70 T200,60" fill="none" stroke="#64748B" stroke-width="1.5" opacity="0.5"/>
-                        <path d="M0,70 Q50,40 100,60 T200,50" fill="none" stroke="#2962FF" stroke-width="2"/>
-                        <path d="M0,90 Q50,60 100,80 T200,70" fill="none" stroke="#00E676" stroke-width="2"/>
-                        <path d="M0,60 Q50,30 100,50 T200,40" fill="none" stroke="#FF1744" stroke-width="2"/>
+                        <path d="M0,80 Q50,50 100,70 T200,60" fill="none" stroke="#64748B" stroke-width="1.5"
+                            opacity="0.5" />
+                        <path d="M0,70 Q50,40 100,60 T200,50" fill="none" stroke="#2962FF" stroke-width="2" />
+                        <path d="M0,90 Q50,60 100,80 T200,70" fill="none" stroke="#00E676" stroke-width="2" />
+                        <path d="M0,60 Q50,30 100,50 T200,40" fill="none" stroke="#FF1744" stroke-width="2" />
                         <text x="140" y="45" fill="#FF1744" font-size="7">Y</text>
                         <text x="140" y="55" fill="#2962FF" font-size="7">Q</text>
                         <text x="140" y="75" fill="#00E676" font-size="7">M</text>
@@ -1261,18 +1325,21 @@
                     <h4 class="script-name">Multi-Anchor VWAP</h4>
                     <div class="script-category">Volume Analysis • Multi-Timeframe</div>
                     <div class="script-metrics">
-                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span class="script-metric-value">50</span></span>
-                        <span class="script-metric"><span class="script-metric-label">Published: </span><span class="script-metric-value">Nov 2025</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span
+                                class="script-metric-value">50</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Published: </span><span
+                                class="script-metric-value">Nov 2025</span></span>
                     </div>
                 </div>
             </a>
-            <a href="https://www.tradingview.com/script/QKoxs5HP-Custom-Horizontal-Lines-Trade-Symmetry/" target="_blank" class="script-card">
+            <a href="https://www.tradingview.com/script/QKoxs5HP-Custom-Horizontal-Lines-Trade-Symmetry/"
+                target="_blank" class="script-card">
                 <div class="script-preview">
                     <svg class="script-preview-chart" viewBox="0 0 200 120" preserveAspectRatio="none">
-                        <line x1="30" y1="20" x2="30" y2="110" stroke="#00E676" stroke-width="2"/>
-                        <line x1="80" y1="30" x2="80" y2="110" stroke="#2962FF" stroke-width="2"/>
-                        <line x1="130" y1="40" x2="130" y2="110" stroke="#FF1744" stroke-width="2"/>
-                        <line x1="170" y1="25" x2="170" y2="110" stroke="#FFD700" stroke-width="2"/>
+                        <line x1="30" y1="20" x2="30" y2="110" stroke="#00E676" stroke-width="2" />
+                        <line x1="80" y1="30" x2="80" y2="110" stroke="#2962FF" stroke-width="2" />
+                        <line x1="130" y1="40" x2="130" y2="110" stroke="#FF1744" stroke-width="2" />
+                        <line x1="170" y1="25" x2="170" y2="110" stroke="#FFD700" stroke-width="2" />
                         <text x="32" y="105" fill="#00E676" font-size="7">OB</text>
                         <text x="82" y="105" fill="#2962FF" font-size="7">FVG</text>
                         <text x="132" y="105" fill="#FF1744" font-size="7">WHM</text>
@@ -1284,23 +1351,29 @@
                     <h4 class="script-name">Custom Horizontal Lines</h4>
                     <div class="script-category">Manual Analysis • SMC Trading</div>
                     <div class="script-metrics">
-                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span class="script-metric-value">41</span></span>
-                        <span class="script-metric"><span class="script-metric-label">Published: </span><span class="script-metric-value">Nov 2025</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span
+                                class="script-metric-value">41</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Published: </span><span
+                                class="script-metric-value">Nov 2025</span></span>
                     </div>
                 </div>
             </a>
-            <a href="https://www.tradingview.com/script/CZRZip0I-ICT-ADR-AWR-AMR-Levels-Trade-Symmetry/" target="_blank" class="script-card">
+            <a href="https://www.tradingview.com/script/CZRZip0I-ICT-ADR-AWR-AMR-Levels-Trade-Symmetry/" target="_blank"
+                class="script-card">
                 <div class="script-preview">
                     <svg class="script-preview-chart" viewBox="0 0 200 120" preserveAspectRatio="none">
-                        <line x1="0" y1="50" x2="200" y2="50" stroke="#2A3447" stroke-width="1"/>
-                        <line x1="0" y1="70" x2="200" y2="70" stroke="#2A3447" stroke-width="1"/>
-                        <line x1="0" y1="90" x2="200" y2="90" stroke="#2A3447" stroke-width="1"/>
+                        <line x1="0" y1="50" x2="200" y2="50" stroke="#2A3447" stroke-width="1" />
+                        <line x1="0" y1="70" x2="200" y2="70" stroke="#2A3447" stroke-width="1" />
+                        <line x1="0" y1="90" x2="200" y2="90" stroke="#2A3447" stroke-width="1" />
                         <text x="5" y="48" fill="#00E676" font-size="8">ADR HIGH</text>
                         <text x="5" y="68" fill="#94A3B8" font-size="8">OPEN</text>
                         <text x="5" y="88" fill="#FF1744" font-size="8">ADR LOW</text>
-                        <rect x="40" y="55" width="30" height="10" fill="none" stroke="#2962FF" stroke-width="1" stroke-dasharray="2"/>
-                        <rect x="100" y="75" width="30" height="10" fill="none" stroke="#2962FF" stroke-width="1" stroke-dasharray="2"/>
-                        <rect x="150" y="95" width="30" height="10" fill="none" stroke="#2962FF" stroke-width="1" stroke-dasharray="2"/>
+                        <rect x="40" y="55" width="30" height="10" fill="none" stroke="#2962FF" stroke-width="1"
+                            stroke-dasharray="2" />
+                        <rect x="100" y="75" width="30" height="10" fill="none" stroke="#2962FF" stroke-width="1"
+                            stroke-dasharray="2" />
+                        <rect x="150" y="95" width="30" height="10" fill="none" stroke="#2962FF" stroke-width="1"
+                            stroke-dasharray="2" />
                         <text x="45" y="63" fill="#2962FF" font-size="5">1.0</text>
                         <text x="105" y="83" fill="#2962FF" font-size="5">1.618</text>
                         <text x="155" y="103" fill="#2962FF" font-size="5">2.0</text>
@@ -1311,27 +1384,33 @@
                     <h4 class="script-name">ICT ADR/AWR/AMR Levels</h4>
                     <div class="script-category">Volatility Levels • Institutional</div>
                     <div class="script-metrics">
-                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span class="script-metric-value">44</span></span>
-                        <span class="script-metric"><span class="script-metric-label">Comments: </span><span class="script-metric-value">27</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span
+                                class="script-metric-value">44</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Comments: </span><span
+                                class="script-metric-value">27</span></span>
                     </div>
                 </div>
             </a>
-            <a href="https://www.tradingview.com/script/dD4CCfGj-Multi-Timeframe-Fibonacci-Open-Levels/" target="_blank" class="script-card">
+            <a href="https://www.tradingview.com/script/dD4CCfGj-Multi-Timeframe-Fibonacci-Open-Levels/" target="_blank"
+                class="script-card">
                 <div class="script-preview">
                     <svg class="script-preview-chart" viewBox="0 0 200 120" preserveAspectRatio="none">
-                        <polyline points="10,100 30,60 50,80 70,40 90,60 110,30 130,50 150,20 170,40 190,10" fill="none" stroke="#2962FF" stroke-width="1.5"/>
-                        <line x1="30" y1="60" x2="190" y2="60" stroke="#00E676" stroke-width="1" stroke-dasharray="3"/>
-                        <line x1="70" y1="40" x2="190" y2="40" stroke="#00E676" stroke-width="1" stroke-dasharray="3"/>
-                        <line x1="110" y1="30" x2="190" y2="30" stroke="#00E676" stroke-width="1" stroke-dasharray="3"/>
-                        <line x1="150" y1="20" x2="190" y2="20" stroke="#00E676" stroke-width="1" stroke-dasharray="3"/>
+                        <polyline points="10,100 30,60 50,80 70,40 90,60 110,30 130,50 150,20 170,40 190,10" fill="none"
+                            stroke="#2962FF" stroke-width="1.5" />
+                        <line x1="30" y1="60" x2="190" y2="60" stroke="#00E676" stroke-width="1" stroke-dasharray="3" />
+                        <line x1="70" y1="40" x2="190" y2="40" stroke="#00E676" stroke-width="1" stroke-dasharray="3" />
+                        <line x1="110" y1="30" x2="190" y2="30" stroke="#00E676" stroke-width="1"
+                            stroke-dasharray="3" />
+                        <line x1="150" y1="20" x2="190" y2="20" stroke="#00E676" stroke-width="1"
+                            stroke-dasharray="3" />
                         <text x="160" y="57" fill="#00E676" font-size="6">0.618</text>
                         <text x="160" y="37" fill="#00E676" font-size="6">0.786</text>
                         <text x="160" y="27" fill="#00E676" font-size="6">1.0</text>
                         <text x="160" y="17" fill="#00E676" font-size="6">1.272</text>
-                        <circle cx="30" cy="60" r="3" fill="none" stroke="#FFD700" stroke-width="1"/>
-                        <circle cx="70" cy="40" r="3" fill="none" stroke="#FFD700" stroke-width="1"/>
-                        <circle cx="110" cy="30" r="3" fill="none" stroke="#FFD700" stroke-width="1"/>
-                        <circle cx="150" cy="20" r="3" fill="none" stroke="#FFD700" stroke-width="1"/>
+                        <circle cx="30" cy="60" r="3" fill="none" stroke="#FFD700" stroke-width="1" />
+                        <circle cx="70" cy="40" r="3" fill="none" stroke="#FFD700" stroke-width="1" />
+                        <circle cx="110" cy="30" r="3" fill="none" stroke="#FFD700" stroke-width="1" />
+                        <circle cx="150" cy="20" r="3" fill="none" stroke="#FFD700" stroke-width="1" />
                     </svg>
                     <span class="script-badge free">Free</span>
                 </div>
@@ -1339,23 +1418,30 @@
                     <h4 class="script-name">Multi-Timeframe Fibonacci + Open Levels</h4>
                     <div class="script-category">Fibonacci • Confluence Analysis</div>
                     <div class="script-metrics">
-                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span class="script-metric-value">23</span></span>
-                        <span class="script-metric"><span class="script-metric-label">Published: </span><span class="script-metric-value">Nov 2025</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span
+                                class="script-metric-value">23</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Published: </span><span
+                                class="script-metric-value">Nov 2025</span></span>
                     </div>
                 </div>
             </a>
-            <a href="https://www.tradingview.com/script/RM47dSwy-Advanced-Time-Technique/" target="_blank" class="script-card">
+            <a href="https://www.tradingview.com/script/RM47dSwy-Advanced-Time-Technique/" target="_blank"
+                class="script-card">
                 <div class="script-preview">
                     <svg class="script-preview-chart" viewBox="0 0 200 120" preserveAspectRatio="none">
-                        <rect x="5" y="10" width="190" height="100" fill="none" stroke="#2A3447" stroke-width="1"/>
-                        <rect x="10" y="15" width="35" height="90" fill="none" stroke="#2962FF" stroke-width="1" stroke-dasharray="2"/>
-                        <rect x="50" y="15" width="35" height="90" fill="none" stroke="#2962FF" stroke-width="1" stroke-dasharray="2"/>
-                        <rect x="90" y="15" width="35" height="90" fill="none" stroke="#2962FF" stroke-width="1" stroke-dasharray="2"/>
-                        <rect x="130" y="15" width="35" height="90" fill="none" stroke="#2962FF" stroke-width="1" stroke-dasharray="2"/>
-                        <circle cx="35" cy="95" r="4" fill="#00E676"/>
-                        <circle cx="75" cy="75" r="4" fill="#00E676"/>
-                        <circle cx="115" cy="55" r="4" fill="#00E676"/>
-                        <circle cx="155" cy="35" r="4" fill="#00E676"/>
+                        <rect x="5" y="10" width="190" height="100" fill="none" stroke="#2A3447" stroke-width="1" />
+                        <rect x="10" y="15" width="35" height="90" fill="none" stroke="#2962FF" stroke-width="1"
+                            stroke-dasharray="2" />
+                        <rect x="50" y="15" width="35" height="90" fill="none" stroke="#2962FF" stroke-width="1"
+                            stroke-dasharray="2" />
+                        <rect x="90" y="15" width="35" height="90" fill="none" stroke="#2962FF" stroke-width="1"
+                            stroke-dasharray="2" />
+                        <rect x="130" y="15" width="35" height="90" fill="none" stroke="#2962FF" stroke-width="1"
+                            stroke-dasharray="2" />
+                        <circle cx="35" cy="95" r="4" fill="#00E676" />
+                        <circle cx="75" cy="75" r="4" fill="#00E676" />
+                        <circle cx="115" cy="55" r="4" fill="#00E676" />
+                        <circle cx="155" cy="35" r="4" fill="#00E676" />
                         <text x="12" y="110" fill="#94A3B8" font-size="6">3</text>
                         <text x="52" y="110" fill="#94A3B8" font-size="6">11</text>
                         <text x="92" y="110" fill="#94A3B8" font-size="6">17</text>
@@ -1368,8 +1454,10 @@
                     <h4 class="script-name">Advanced Time Technique</h4>
                     <div class="script-category">Time Analysis • Mathematical Levels</div>
                     <div class="script-metrics">
-                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span class="script-metric-value">11</span></span>
-                        <span class="script-metric"><span class="script-metric-label">Comments: </span><span class="script-metric-value">15</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span
+                                class="script-metric-value">11</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Comments: </span><span
+                                class="script-metric-value">15</span></span>
                     </div>
                 </div>
             </a>
@@ -1383,7 +1471,10 @@
                 <div class="proof-trust">
                     <a href="https://www.tradingview.com/u/TradeSymmetry/" target="_blank" class="proof-platform">
                         <div class="proof-platform-logo">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                            </svg>
                         </div>
                         <div>
                             <div class="proof-platform-name">TradingView</div>
@@ -1392,7 +1483,10 @@
                     </a>
                     <a href="https://www.linkedin.com/in/ravikumarsd/" target="_blank" class="proof-platform">
                         <div class="proof-platform-logo" style="background: linear-gradient(135deg, #0077B5, #00A0DC);">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                                <path
+                                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                            </svg>
                         </div>
                         <div>
                             <div class="proof-platform-name">LinkedIn</div>
@@ -1400,7 +1494,9 @@
                         </div>
                     </a>
                 </div>
-                <p class="proof-quote">"TradeSymmetry scripts have transformed my trading. The precision and reliability of the signals have given me the confidence to scale my positions. The non-repainting indicators are a game-changer for systematic trading."</p>
+                <p class="proof-quote">"TradeSymmetry scripts have transformed my trading. The precision and reliability
+                    of the signals have given me the confidence to scale my positions. The non-repainting indicators are
+                    a game-changer for systematic trading."</p>
                 <div class="proof-author">
                     <div class="proof-avatar">RK</div>
                     <div>
@@ -1414,19 +1510,20 @@
                     <svg class="proof-chart" viewBox="0 0 300 180" preserveAspectRatio="none">
                         <defs>
                             <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="#2962FF" stop-opacity="0.3"/>
-                                <stop offset="100%" stop-color="#2962FF" stop-opacity="0"/>
+                                <stop offset="0%" stop-color="#2962FF" stop-opacity="0.3" />
+                                <stop offset="100%" stop-color="#2962FF" stop-opacity="0" />
                             </linearGradient>
                         </defs>
-                        <rect x="10" y="100" width="25" height="80" fill="url(#chartGradient)" rx="4"/>
-                        <rect x="45" y="80" width="25" height="100" fill="url(#chartGradient)" rx="4"/>
-                        <rect x="80" y="90" width="25" height="90" fill="url(#chartGradient)" rx="4"/>
-                        <rect x="115" y="60" width="25" height="120" fill="url(#chartGradient)" rx="4"/>
-                        <rect x="150" y="70" width="25" height="110" fill="url(#chartGradient)" rx="4"/>
-                        <rect x="185" y="40" width="25" height="140" fill="url(#chartGradient)" rx="4"/>
-                        <rect x="220" y="50" width="25" height="130" fill="url(#chartGradient)" rx="4"/>
-                        <rect x="255" y="30" width="25" height="150" fill="url(#chartGradient)" rx="4"/>
-                        <polyline points="10,100 45,80 80,90 115,60 150,70 185,40 220,50 255,30" fill="none" stroke="#00E676" stroke-width="2"/>
+                        <rect x="10" y="100" width="25" height="80" fill="url(#chartGradient)" rx="4" />
+                        <rect x="45" y="80" width="25" height="100" fill="url(#chartGradient)" rx="4" />
+                        <rect x="80" y="90" width="25" height="90" fill="url(#chartGradient)" rx="4" />
+                        <rect x="115" y="60" width="25" height="120" fill="url(#chartGradient)" rx="4" />
+                        <rect x="150" y="70" width="25" height="110" fill="url(#chartGradient)" rx="4" />
+                        <rect x="185" y="40" width="25" height="140" fill="url(#chartGradient)" rx="4" />
+                        <rect x="220" y="50" width="25" height="130" fill="url(#chartGradient)" rx="4" />
+                        <rect x="255" y="30" width="25" height="150" fill="url(#chartGradient)" rx="4" />
+                        <polyline points="10,100 45,80 80,90 115,60 150,70 185,40 220,50 255,30" fill="none"
+                            stroke="#00E676" stroke-width="2" />
                     </svg>
                     <div class="proof-metrics">
                         <div class="proof-metric">
@@ -1451,7 +1548,8 @@
     <section class="cta" id="contact">
         <div class="cta-card">
             <h2 class="cta-title">Ready to Elevate Your Trading?</h2>
-            <p class="cta-desc">Join thousands of traders who trust TradeSymmetry for professional-grade indicators and strategies.</p>
+            <p class="cta-desc">Join thousands of traders who trust TradeSymmetry for professional-grade indicators and
+                strategies.</p>
             <a href="https://www.tradingview.com/u/TradeSymmetry/" target="_blank" class="cta-button">
                 Access All Scripts
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1468,17 +1566,29 @@
             <div class="footer-brand">
                 <div class="footer-logo">
                     <div class="footer-logo-icon">
-                        <svg viewBox="0 0 24 24"><path d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h2v2H7V7zm4 0h2v2h-2V7zm4 0h2v2h-2V7zM7 11h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM7 15h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z"/></svg>
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h2v2H7V7zm4 0h2v2h-2V7zm4 0h2v2h-2V7zM7 11h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM7 15h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z" />
+                        </svg>
                     </div>
                     <span class="footer-logo-text">TradeSymmetry</span>
                 </div>
-                <p class="footer-desc">Professional TradingView scripts and algorithmic strategies for serious traders. Built with precision, designed for performance.</p>
+                <p class="footer-desc">Professional TradingView scripts and algorithmic strategies for serious traders.
+                    Built with precision, designed for performance.</p>
                 <div class="footer-social">
-                    <a href="https://www.tradingview.com/u/TradeSymmetry/" target="_blank" class="footer-social-link" title="TradingView">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    <a href="https://www.tradingview.com/u/TradeSymmetry/" target="_blank" class="footer-social-link"
+                        title="TradingView">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg>
                     </a>
-                    <a href="https://www.linkedin.com/in/ravikumarsd/" target="_blank" class="footer-social-link" title="LinkedIn">
-                        <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                    <a href="https://www.linkedin.com/in/ravikumarsd/" target="_blank" class="footer-social-link"
+                        title="LinkedIn">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                        </svg>
                     </a>
                 </div>
             </div>
@@ -1486,7 +1596,10 @@
         <div class="footer-bottom">
             <p class="footer-copyright">&copy; 2025 TradeSymmetry. All rights reserved.</p>
         </div>
-        <p class="footer-disclaimer">DISCLAIMER: Trading involves substantial risk and may not be suitable for all investors. Past performance does not guarantee future results. The scripts and strategies provided are for educational purposes only and should not be construed as financial advice. Always conduct your own research and consider seeking advice from a licensed financial professional before making any trading decisions.</p>
+        <p class="footer-disclaimer">DISCLAIMER: Trading involves substantial risk and may not be suitable for all
+            investors. Past performance does not guarantee future results. The scripts and strategies provided are for
+            educational purposes only and should not be construed as financial advice. Always conduct your own research
+            and consider seeking advice from a licensed financial professional before making any trading decisions.</p>
     </footer>
 
     <script>
@@ -1507,7 +1620,7 @@
 
         // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
                 if (href !== '#') {
                     e.preventDefault();
@@ -1557,26 +1670,30 @@
         const nav = document.querySelector('.nav');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
-                nav.style.background = 'rgba(11, 14, 20, 0.95)';
+                // Instead of forcing a color, we just add a class
+                // The CSS variables will handle the colors automatically!
+                nav.classList.add('scrolled');
             } else {
-                nav.style.background = 'rgba(11, 14, 20, 0.8)';
+                nav.classList.remove('scrolled');
             }
         });
 
         // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
-        
+
         // Check for saved theme preference or default to dark
         const savedTheme = localStorage.getItem('theme') || 'dark';
         document.documentElement.setAttribute('data-theme', savedTheme);
-        
+
         themeToggle.addEventListener('click', () => {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
+
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
         });
+
     </script>
 </body>
+
 </html>
