@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeSymmetry | Professional Trading Scripts & Algorithms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0B0E14;
+            --bg-secondary: #151B28;
+            --bg-tertiary: #1E2538;
+            --border-color: #2A3447;
+            --accent-blue: #2962FF;
+            --accent-blue-dim: rgba(41, 98, 255, 0.15);
+            --bullish: #00E676;
+            --bearish: #FF1744;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --bg-tertiary: #E2E8F0;
+            --border-color: #E2E8F0;
+            --accent-blue: #2563EB;
+            --accent-blue-dim: rgba(37, 99, 235, 0.1);
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #94A3B8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(11, 14, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .nav-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-blue), #00E5FF);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-logo-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .nav-logo-text {
+            font-family: 'Manrope', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent-blue);
+            color: var(--text-primary);
+        }
+
+        .theme-toggle svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .sun-icon, .moon-icon {
+            display: none;
+        }
+
+        [data-theme="light"] .sun-icon {
+            display: block;
+        }
+
+        [data-theme="dark"] .moon-icon,
+        :root:not([data-theme="light"]) .moon-icon {
+            display: block;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-cta {
+            background: var(--accent-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .nav-cta:hover {
+            background: #1A53E8;
+            transform: translateY(-1px);
+        }
+
+        .nav-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 24px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-blue-dim), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(0, 230, 118, 0.03), transparent);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(var(--border-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.15;
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-blue-dim);
+            border: 1px solid rgba(41, 98, 255, 0.3);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            color: var(--accent-blue);
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(40px, 6vw, 64px);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--accent-blue);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-right: 16px;
+        }
+
+        .hero-cta:hover {
+            background: #1A53E8;
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(41, 98, 255, 0.3);
+        }
+
+        .hero-cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--text-primary);
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .hero-cta-secondary:hover {
+            background: var(--bg-secondary);
+            border-color: var(--text-secondary);
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 64px;
+            padding-top: 48px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .hero-stat-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 24px;
+            background: var(--bg-secondary);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 64px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-blue);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-blue-dim);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--accent-blue);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .feature-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .feature-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Scripts Section */
+        .scripts {
+            padding: 120px 24px;
+        }
+
+        .scripts-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 48px;
+        }
+
+        .script-tab {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .script-tab:hover,
+        .script-tab.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+        }
+
+        .scripts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .script-card,
+        a.script-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .script-card:hover,
+        a.script-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-4px);
+        }
+
+        .script-preview {
+            height: 160px;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .script-preview-chart {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+        }
+
+        .script-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .script-badge.premium {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+        }
+
+        .script-badge.free {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+
+        .script-info {
+            padding: 24px;
+        }
+
+        .script-name {
+            font-family: 'Manrope', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .script-category {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .script-metrics {
+            display: flex;
+            gap: 16px;
+        }
+
+        .script-metric {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+        }
+
+        .script-metric-label {
+            color: var(--text-muted);
+        }
+
+        .script-metric-value {
+            color: var(--bullish);
+            font-weight: 500;
+        }
+
+        /* Social Proof Section */
+        .social-proof {
+            padding: 120px 24px;
+            background: var(--bg-secondary);
+        }
+
+        .proof-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .proof-content {
+            padding-right: 32px;
+        }
+
+        .proof-trust {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .proof-platform {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .proof-platform-logo {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #3B5998, #00B900);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .proof-platform-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .proof-platform-stat {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .proof-quote {
+            font-size: 20px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            padding-left: 24px;
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        .proof-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .proof-avatar {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent-blue), #00E5FF);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .proof-author-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .proof-author-title {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .proof-visual {
+            position: relative;
+        }
+
+        .proof-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+            position: relative;
+        }
+
+        .proof-chart {
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            padding: 20px 0;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--accent-blue-dim), var(--accent-blue));
+            border-radius: 4px 4px 0 0;
+            animation: chartGrow 1s ease-out forwards;
+        }
+
+        @keyframes chartGrow {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+
+        .proof-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .proof-metric {
+            text-align: center;
+        }
+
+        .proof-metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .proof-metric-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 120px 24px;
+            text-align: center;
+        }
+
+        .cta-card {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+        }
+
+        .cta-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(28px, 4vw, 36px);
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .cta-desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--accent-blue);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #1A53E8;
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(41, 98, 255, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 64px 24px 32px;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 32px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand {
+            max-width: 100%;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .footer-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-blue), #00E5FF);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-logo-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .footer-logo-text {
+            font-family: 'Manrope', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .footer-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .footer-social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .footer-social-link:hover {
+            border-color: var(--accent-blue);
+            background: var(--accent-blue-dim);
+        }
+
+        .footer-social-link svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--text-secondary);
+        }
+
+        .footer-column-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 12px;
+        }
+
+        .footer-link a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-copyright {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-legal a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-legal a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-disclaimer {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 24px auto 0;
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 24px;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .mobile-menu-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mobile-menu-link:hover {
+            color: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .features-grid,
+            .scripts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .proof-container {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .proof-content {
+                padding-right: 0;
+                text-align: center;
+            }
+
+            .proof-trust {
+                justify-content: center;
+            }
+
+            .proof-quote {
+                text-align: left;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .hero-cta,
+            .hero-cta-secondary {
+                display: block;
+                margin: 0 0 12px;
+                text-align: center;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .features-grid,
+            .scripts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .scripts-tabs {
+                flex-wrap: wrap;
+            }
+
+            .cta-card {
+                padding: 40px 24px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-brand {
+                max-width: 100%;
+            }
+
+            .footer-social {
+                justify-content: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-legal {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#" class="nav-logo">
+            <div class="nav-logo-icon">
+                <svg viewBox="0 0 24 24"><path d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h2v2H7V7zm4 0h2v2h-2V7zm4 0h2v2h-2V7zM7 11h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM7 15h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z"/></svg>
+            </div>
+            <span class="nav-logo-text">TradeSymmetry</span>
+        </a>
+        <div class="nav-links">
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#scripts" class="nav-link">Scripts</a>
+            <a href="#about" class="nav-link">About</a>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+            <a href="https://www.tradingview.com/u/TradeSymmetry/" target="_blank" class="nav-cta">View Scripts</a>
+        </div>
+        <button class="nav-menu-btn" id="menuToggle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-links">
+            <a href="#features" class="mobile-menu-link">Features</a>
+            <a href="#scripts" class="mobile-menu-link">Scripts</a>
+            <a href="#about" class="mobile-menu-link">About</a>
+            <a href="#contact" class="mobile-menu-link">Contact</a>
+            <a href="https://www.tradingview.com/u/TradeSymmetry/" target="_blank" class="nav-cta">View Scripts</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                Professional Trading Algorithms
+            </div>
+            <h1 class="hero-title">Trading Decoded through Symmetry</h1>
+            <p class="hero-subtitle">Institutional-grade TradingView scripts and algorithmic strategies designed for precision, reliability, and consistent performance.</p>
+            <div>
+                <a href="#scripts" class="hero-cta">
+                    Explore Scripts
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </a>
+                <a href="#about" class="hero-cta-secondary">Learn More</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-value">6</div>
+                    <div class="hero-stat-label">Published Scripts</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">24</div>
+                    <div class="hero-stat-label">Followers</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">201</div>
+                    <div class="hero-stat-label">Total Likes</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <div class="section-label">Why TradeSymmetry</div>
+            <h2 class="section-title">Tools Built for Serious Traders</h2>
+            <p class="section-desc">Every script is engineered with precision, backed by data, and designed to give you the analytical edge you need.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                </div>
+                <h3 class="feature-title">Non-Repainting</h3>
+                <p class="feature-desc">All indicators are built with non-repainting logic, ensuring reliable signals that don't change after the fact.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                </div>
+                <h3 class="feature-title">Multi-Timeframe</h3>
+                <p class="feature-desc">Analyze markets across multiple timeframes simultaneously for a comprehensive view of market dynamics.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                </div>
+                <h3 class="feature-title">Alert Enabled</h3>
+                <p class="feature-desc">Built-in alert functionality keeps you notified of trading opportunities even when you're away from the charts.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <h3 class="feature-title">Risk Management</h3>
+                <p class="feature-desc">Integrated position sizing and risk calculation tools to help protect your capital on every trade.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                </div>
+                <h3 class="feature-title">Clear Signals</h3>
+                <p class="feature-desc">Unambiguous entry and exit signals designed for quick decision-making in fast-moving markets.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                </div>
+                <h3 class="feature-title">Well Documented</h3>
+                <p class="feature-desc">Comprehensive documentation and tutorials help you understand and maximize each tool's potential.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts Section -->
+    <section class="scripts" id="scripts">
+        <div class="section-header">
+            <div class="section-label">Script Library</div>
+            <h2 class="section-title">Premium Trading Tools</h2>
+            <p class="section-desc">Explore our collection of professional-grade TradingView scripts designed for various trading styles and markets.</p>
+        </div>
+        </div>
+        <div class="scripts-grid">
+            <a href="https://www.tradingview.com/script/8rg748c1-Range-Deviations-PRO-Trade-Symmetry/" target="_blank" class="script-card">
+                <div class="script-preview">
+                    <svg class="script-preview-chart" viewBox="0 0 200 120" preserveAspectRatio="none">
+                        <rect x="10" y="40" width="180" height="40" fill="none" stroke="#2962FF" stroke-width="1" stroke-dasharray="4"/>
+                        <rect x="10" y="55" width="180" height="10" fill="none" stroke="#00E676" stroke-width="1"/>
+                        <line x1="10" y1="40" x2="10" y2="80" stroke="#FF1744" stroke-width="1" stroke-dasharray="2"/>
+                        <line x1="190" y1="40" x2="190" y2="80" stroke="#FF1744" stroke-width="1" stroke-dasharray="2"/>
+                        <text x="25" y="35" fill="#94A3B8" font-size="6">+2SD</text>
+                        <text x="25" y="65" fill="#00E676" font-size="6">EQUILIBRIUM</text>
+                        <text x="25" y="95" fill="#94A3B8" font-size="6">-2SD</text>
+                    </svg>
+                    <span class="script-badge free">Free</span>
+                </div>
+                <div class="script-info">
+                    <h4 class="script-name">Range Deviations PRO</h4>
+                    <div class="script-category">Session Analysis • ICT Methodology</div>
+                    <div class="script-metrics">
+                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span class="script-metric-value">32</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Updated: </span><span class="script-metric-value">Dec 2025</span></span>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.tradingview.com/script/2VUW4Xol-Multi-Anchor-VWAP-Trade-Symmetry/" target="_blank" class="script-card">
+                <div class="script-preview">
+                    <svg class="script-preview-chart" viewBox="0 0 200 120" preserveAspectRatio="none">
+                        <path d="M0,80 Q50,50 100,70 T200,60" fill="none" stroke="#64748B" stroke-width="1.5" opacity="0.5"/>
+                        <path d="M0,70 Q50,40 100,60 T200,50" fill="none" stroke="#2962FF" stroke-width="2"/>
+                        <path d="M0,90 Q50,60 100,80 T200,70" fill="none" stroke="#00E676" stroke-width="2"/>
+                        <path d="M0,60 Q50,30 100,50 T200,40" fill="none" stroke="#FF1744" stroke-width="2"/>
+                        <text x="140" y="45" fill="#FF1744" font-size="7">Y</text>
+                        <text x="140" y="55" fill="#2962FF" font-size="7">Q</text>
+                        <text x="140" y="75" fill="#00E676" font-size="7">M</text>
+                        <text x="140" y="85" fill="#64748B" font-size="7">W</text>
+                    </svg>
+                    <span class="script-badge free">Free</span>
+                </div>
+                <div class="script-info">
+                    <h4 class="script-name">Multi-Anchor VWAP</h4>
+                    <div class="script-category">Volume Analysis • Multi-Timeframe</div>
+                    <div class="script-metrics">
+                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span class="script-metric-value">50</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Published: </span><span class="script-metric-value">Nov 2025</span></span>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.tradingview.com/script/QKoxs5HP-Custom-Horizontal-Lines-Trade-Symmetry/" target="_blank" class="script-card">
+                <div class="script-preview">
+                    <svg class="script-preview-chart" viewBox="0 0 200 120" preserveAspectRatio="none">
+                        <line x1="30" y1="20" x2="30" y2="110" stroke="#00E676" stroke-width="2"/>
+                        <line x1="80" y1="30" x2="80" y2="110" stroke="#2962FF" stroke-width="2"/>
+                        <line x1="130" y1="40" x2="130" y2="110" stroke="#FF1744" stroke-width="2"/>
+                        <line x1="170" y1="25" x2="170" y2="110" stroke="#FFD700" stroke-width="2"/>
+                        <text x="32" y="105" fill="#00E676" font-size="7">OB</text>
+                        <text x="82" y="105" fill="#2962FF" font-size="7">FVG</text>
+                        <text x="132" y="105" fill="#FF1744" font-size="7">WHM</text>
+                        <text x="172" y="105" fill="#FFD700" font-size="7">QT</text>
+                    </svg>
+                    <span class="script-badge free">Free</span>
+                </div>
+                <div class="script-info">
+                    <h4 class="script-name">Custom Horizontal Lines</h4>
+                    <div class="script-category">Manual Analysis • SMC Trading</div>
+                    <div class="script-metrics">
+                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span class="script-metric-value">41</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Published: </span><span class="script-metric-value">Nov 2025</span></span>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.tradingview.com/script/CZRZip0I-ICT-ADR-AWR-AMR-Levels-Trade-Symmetry/" target="_blank" class="script-card">
+                <div class="script-preview">
+                    <svg class="script-preview-chart" viewBox="0 0 200 120" preserveAspectRatio="none">
+                        <line x1="0" y1="50" x2="200" y2="50" stroke="#2A3447" stroke-width="1"/>
+                        <line x1="0" y1="70" x2="200" y2="70" stroke="#2A3447" stroke-width="1"/>
+                        <line x1="0" y1="90" x2="200" y2="90" stroke="#2A3447" stroke-width="1"/>
+                        <text x="5" y="48" fill="#00E676" font-size="8">ADR HIGH</text>
+                        <text x="5" y="68" fill="#94A3B8" font-size="8">OPEN</text>
+                        <text x="5" y="88" fill="#FF1744" font-size="8">ADR LOW</text>
+                        <rect x="40" y="55" width="30" height="10" fill="none" stroke="#2962FF" stroke-width="1" stroke-dasharray="2"/>
+                        <rect x="100" y="75" width="30" height="10" fill="none" stroke="#2962FF" stroke-width="1" stroke-dasharray="2"/>
+                        <rect x="150" y="95" width="30" height="10" fill="none" stroke="#2962FF" stroke-width="1" stroke-dasharray="2"/>
+                        <text x="45" y="63" fill="#2962FF" font-size="5">1.0</text>
+                        <text x="105" y="83" fill="#2962FF" font-size="5">1.618</text>
+                        <text x="155" y="103" fill="#2962FF" font-size="5">2.0</text>
+                    </svg>
+                    <span class="script-badge free">Free</span>
+                </div>
+                <div class="script-info">
+                    <h4 class="script-name">ICT ADR/AWR/AMR Levels</h4>
+                    <div class="script-category">Volatility Levels • Institutional</div>
+                    <div class="script-metrics">
+                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span class="script-metric-value">44</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Comments: </span><span class="script-metric-value">27</span></span>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.tradingview.com/script/dD4CCfGj-Multi-Timeframe-Fibonacci-Open-Levels/" target="_blank" class="script-card">
+                <div class="script-preview">
+                    <svg class="script-preview-chart" viewBox="0 0 200 120" preserveAspectRatio="none">
+                        <polyline points="10,100 30,60 50,80 70,40 90,60 110,30 130,50 150,20 170,40 190,10" fill="none" stroke="#2962FF" stroke-width="1.5"/>
+                        <line x1="30" y1="60" x2="190" y2="60" stroke="#00E676" stroke-width="1" stroke-dasharray="3"/>
+                        <line x1="70" y1="40" x2="190" y2="40" stroke="#00E676" stroke-width="1" stroke-dasharray="3"/>
+                        <line x1="110" y1="30" x2="190" y2="30" stroke="#00E676" stroke-width="1" stroke-dasharray="3"/>
+                        <line x1="150" y1="20" x2="190" y2="20" stroke="#00E676" stroke-width="1" stroke-dasharray="3"/>
+                        <text x="160" y="57" fill="#00E676" font-size="6">0.618</text>
+                        <text x="160" y="37" fill="#00E676" font-size="6">0.786</text>
+                        <text x="160" y="27" fill="#00E676" font-size="6">1.0</text>
+                        <text x="160" y="17" fill="#00E676" font-size="6">1.272</text>
+                        <circle cx="30" cy="60" r="3" fill="none" stroke="#FFD700" stroke-width="1"/>
+                        <circle cx="70" cy="40" r="3" fill="none" stroke="#FFD700" stroke-width="1"/>
+                        <circle cx="110" cy="30" r="3" fill="none" stroke="#FFD700" stroke-width="1"/>
+                        <circle cx="150" cy="20" r="3" fill="none" stroke="#FFD700" stroke-width="1"/>
+                    </svg>
+                    <span class="script-badge free">Free</span>
+                </div>
+                <div class="script-info">
+                    <h4 class="script-name">Multi-Timeframe Fibonacci + Open Levels</h4>
+                    <div class="script-category">Fibonacci • Confluence Analysis</div>
+                    <div class="script-metrics">
+                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span class="script-metric-value">23</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Published: </span><span class="script-metric-value">Nov 2025</span></span>
+                    </div>
+                </div>
+            </a>
+            <a href="https://www.tradingview.com/script/RM47dSwy-Advanced-Time-Technique/" target="_blank" class="script-card">
+                <div class="script-preview">
+                    <svg class="script-preview-chart" viewBox="0 0 200 120" preserveAspectRatio="none">
+                        <rect x="5" y="10" width="190" height="100" fill="none" stroke="#2A3447" stroke-width="1"/>
+                        <rect x="10" y="15" width="35" height="90" fill="none" stroke="#2962FF" stroke-width="1" stroke-dasharray="2"/>
+                        <rect x="50" y="15" width="35" height="90" fill="none" stroke="#2962FF" stroke-width="1" stroke-dasharray="2"/>
+                        <rect x="90" y="15" width="35" height="90" fill="none" stroke="#2962FF" stroke-width="1" stroke-dasharray="2"/>
+                        <rect x="130" y="15" width="35" height="90" fill="none" stroke="#2962FF" stroke-width="1" stroke-dasharray="2"/>
+                        <circle cx="35" cy="95" r="4" fill="#00E676"/>
+                        <circle cx="75" cy="75" r="4" fill="#00E676"/>
+                        <circle cx="115" cy="55" r="4" fill="#00E676"/>
+                        <circle cx="155" cy="35" r="4" fill="#00E676"/>
+                        <text x="12" y="110" fill="#94A3B8" font-size="6">3</text>
+                        <text x="52" y="110" fill="#94A3B8" font-size="6">11</text>
+                        <text x="92" y="110" fill="#94A3B8" font-size="6">17</text>
+                        <text x="132" y="110" fill="#94A3B8" font-size="6">29</text>
+                        <text x="172" y="110" fill="#94A3B8" font-size="6">41</text>
+                    </svg>
+                    <span class="script-badge free">Free</span>
+                </div>
+                <div class="script-info">
+                    <h4 class="script-name">Advanced Time Technique</h4>
+                    <div class="script-category">Time Analysis • Mathematical Levels</div>
+                    <div class="script-metrics">
+                        <span class="script-metric"><span class="script-metric-label">Likes: </span><span class="script-metric-value">11</span></span>
+                        <span class="script-metric"><span class="script-metric-label">Comments: </span><span class="script-metric-value">15</span></span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="social-proof" id="about">
+        <div class="proof-container">
+            <div class="proof-content">
+                <div class="proof-trust">
+                    <a href="https://www.tradingview.com/u/TradeSymmetry/" target="_blank" class="proof-platform">
+                        <div class="proof-platform-logo">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <div>
+                            <div class="proof-platform-name">TradingView</div>
+                            <div class="proof-platform-stat">Top Author • Verified Pine Developer</div>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ravikumarsd/" target="_blank" class="proof-platform">
+                        <div class="proof-platform-logo" style="background: linear-gradient(135deg, #0077B5, #00A0DC);">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                        </div>
+                        <div>
+                            <div class="proof-platform-name">LinkedIn</div>
+                            <div class="proof-platform-stat">Quantitative Finance Professional</div>
+                        </div>
+                    </a>
+                </div>
+                <p class="proof-quote">"TradeSymmetry scripts have transformed my trading. The precision and reliability of the signals have given me the confidence to scale my positions. The non-repainting indicators are a game-changer for systematic trading."</p>
+                <div class="proof-author">
+                    <div class="proof-avatar">RK</div>
+                    <div>
+                        <div class="proof-author-name">Ravi Kumar S D</div>
+                        <div class="proof-author-title">Quantitative Analyst & Pine Script Developer</div>
+                    </div>
+                </div>
+            </div>
+            <div class="proof-visual">
+                <div class="proof-card">
+                    <svg class="proof-chart" viewBox="0 0 300 180" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#2962FF" stop-opacity="0.3"/>
+                                <stop offset="100%" stop-color="#2962FF" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
+                        <rect x="10" y="100" width="25" height="80" fill="url(#chartGradient)" rx="4"/>
+                        <rect x="45" y="80" width="25" height="100" fill="url(#chartGradient)" rx="4"/>
+                        <rect x="80" y="90" width="25" height="90" fill="url(#chartGradient)" rx="4"/>
+                        <rect x="115" y="60" width="25" height="120" fill="url(#chartGradient)" rx="4"/>
+                        <rect x="150" y="70" width="25" height="110" fill="url(#chartGradient)" rx="4"/>
+                        <rect x="185" y="40" width="25" height="140" fill="url(#chartGradient)" rx="4"/>
+                        <rect x="220" y="50" width="25" height="130" fill="url(#chartGradient)" rx="4"/>
+                        <rect x="255" y="30" width="25" height="150" fill="url(#chartGradient)" rx="4"/>
+                        <polyline points="10,100 45,80 80,90 115,60 150,70 185,40 220,50 255,30" fill="none" stroke="#00E676" stroke-width="2"/>
+                    </svg>
+                    <div class="proof-metrics">
+                        <div class="proof-metric">
+                            <div class="proof-metric-value">6</div>
+                            <div class="proof-metric-label">Scripts</div>
+                        </div>
+                        <div class="proof-metric">
+                            <div class="proof-metric-value">201</div>
+                            <div class="proof-metric-label">Total Likes</div>
+                        </div>
+                        <div class="proof-metric">
+                            <div class="proof-metric-value">42</div>
+                            <div class="proof-metric-label">Comments</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta" id="contact">
+        <div class="cta-card">
+            <h2 class="cta-title">Ready to Elevate Your Trading?</h2>
+            <p class="cta-desc">Join thousands of traders who trust TradeSymmetry for professional-grade indicators and strategies.</p>
+            <a href="https://www.tradingview.com/u/TradeSymmetry/" target="_blank" class="cta-button">
+                Access All Scripts
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 7h2v2H7V7zm4 0h2v2h-2V7zm4 0h2v2h-2V7zM7 11h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM7 15h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z"/></svg>
+                    </div>
+                    <span class="footer-logo-text">TradeSymmetry</span>
+                </div>
+                <p class="footer-desc">Professional TradingView scripts and algorithmic strategies for serious traders. Built with precision, designed for performance.</p>
+                <div class="footer-social">
+                    <a href="https://www.tradingview.com/u/TradeSymmetry/" target="_blank" class="footer-social-link" title="TradingView">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ravikumarsd/" target="_blank" class="footer-social-link" title="LinkedIn">
+                        <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copyright">&copy; 2025 TradeSymmetry. All rights reserved.</p>
+        </div>
+        <p class="footer-disclaimer">DISCLAIMER: Trading involves substantial risk and may not be suitable for all investors. Past performance does not guarantee future results. The scripts and strategies provided are for educational purposes only and should not be construed as financial advice. Always conduct your own research and consider seeking advice from a licensed financial professional before making any trading decisions.</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-menu-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Script tabs functionality
+        const scriptTabs = document.querySelectorAll('.script-tab');
+        scriptTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                scriptTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        // Add scroll animation for cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .script-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+
+        // Navbar background on scroll
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(11, 14, 20, 0.95)';
+            } else {
+                nav.style.background = 'rgba(11, 14, 20, 0.8)';
+            }
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        
+        // Check for saved theme preference or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
+</body>
+</html>
